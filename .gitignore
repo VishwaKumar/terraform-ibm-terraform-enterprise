@@ -45,6 +45,7 @@ terraform.rc
 
 # Ignore IDE files
 .idea/
+.bob/
 
 # Node modules
 /node_modules

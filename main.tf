@@ -292,7 +292,6 @@ module "redis" {
   redis_member_host_flavor  = var.redis_member_host_flavor
   redis_service_endpoints   = var.redis_service_endpoints
   kms_key_crn               = module.key_protect_all_inclusive.keys["terraform-enterprise.terraform-enterprise-redis"].crn
-  backup_encryption_key_crn = module.key_protect_all_inclusive.keys["terraform-enterprise.terraform-enterprise-redis-backup"].crn
   resource_tags             = var.resource_tags
   access_tags               = var.access_tags
   redis_deletion_protection = var.redis_deletion_protection

@@ -29,24 +29,29 @@ variable "redis_member_host_flavor" {
   default     = "multitenant"
 }
 
+variable "plan" {
+  type        = string
+  description = "The service plan for the Redis instance. Use 'standard-gen2' for IBM Cloud Databases Gen 2."
+  default     = "standard-gen2"
+  validation {
+    condition     = contains(["standard", "standard-gen2"], var.plan)
+    error_message = "Allowed values are 'standard' and 'standard-gen2'."
+  }
+}
+
 variable "redis_service_endpoints" {
   type        = string
-  description = "Service endpoints for the Redis instance. Default is private."
+  description = "Service endpoints for the Redis instance. Gen 2 only supports 'private'."
   default     = "private"
   validation {
-    condition     = contains(["private", "public-and-private"], var.redis_service_endpoints)
-    error_message = "Allowed values for var.redis_service_endpoints are 'private' and 'public-and-private'"
+    condition     = var.redis_service_endpoints == "private"
+    error_message = "Only 'private' is supported for Gen 2 Redis instances."
   }
 }
 
 variable "kms_key_crn" {
   type        = string
   description = "The CRN of the KMS key to use for encrypting the Redis instance"
-}
-
-variable "backup_encryption_key_crn" {
-  type        = string
-  description = "The CRN of the KMS key to use for encrypting Redis backups"
 }
 
 variable "resource_tags" {
